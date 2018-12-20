@@ -1,4 +1,3 @@
-name: cinder-backend
-summary: OpenStack Cinder backend interface
+name: cinder-backup-swift
+summary: Interface to connect cinder-backup with external swift
 version: 1
-repo: https://github.com/mskalka/interface-cinder-backend
