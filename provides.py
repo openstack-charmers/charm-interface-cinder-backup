@@ -25,4 +25,4 @@ class CinderBackupSwiftClient(RelationBase):
     def configure_principal(self, configuration):
         """Send principal cinder-backup-swift-backend information"""
         conv = self.conversation()
-        conv.set_remote(subordinate_configuration = configuration)
+        conv.set_remote(subordinate_configuration=configuration)

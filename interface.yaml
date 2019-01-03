@@ -1,3 +1,3 @@
-name: cinder-backup-swift
+name: cinder-backup
 summary: Interface to connect cinder-backup with external swift
 version: 1
