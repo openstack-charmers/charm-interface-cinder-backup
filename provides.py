@@ -1,28 +1,25 @@
-#!/usr/bin/python
+# Copyright 2017 Canonical Ltd
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#  http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import uuid
 
 from charms.reactive import hook
-from charms.reactive import RelationBase
-from charms.reactive import scopes
+from charms.reactive import set_flag, clear_flag
+from charms.reactive import Endpoint
 
-class CinderBackupSwiftClient(RelationBase):
-    scope = scopes.GLOBAL
 
-    @hook('{provides:cinder-backup-swift}-relation-{joined,changed}')
-    def cinder_backup_swift_joined(self):
-        conv = self.conversation()
-        conv.set_state('{relation_name}.joined')
-        self.set_state('{relation_name}.connected')
-        self.set_state('{relation_name}.available')
-
-    @hook('{provides:cinder-backup-swift}-relation-{broken, departed}')
-    def cinder_backup_swift_departed(self):
-        conv = self.conversation()
-        conv.remove_state('{relation_name}.joined')
-        self.remove_state('{relation_name}.available')
-        self.remove_state('{relation_name}.connected')
-        conv.set_state('{relation_name}.departing')
-
-    def configure_principal(self, configuration):
-        """Send principal cinder-backup-swift-backend information"""
-        conv = self.conversation()
-        conv.set_remote(subordinate_configuration=configuration)
+class CinderBackupSwiftProviderProvides(Endpoint):
+    def publish(self, configuration):
+       for rel in self.relations:
+           rel.to_publish_raw['subordinate_configuration'] = configuration
