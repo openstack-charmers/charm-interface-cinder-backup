@@ -12,14 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import uuid
-
-from charms.reactive import hook
-from charms.reactive import set_flag, clear_flag
 from charms.reactive import Endpoint
 
 
 class CinderBackupSwiftProviderProvides(Endpoint):
-    def publish(self, configuration):
-       for rel in self.relations:
-           rel.to_publish_raw['subordinate_configuration'] = configuration
+    def publish(self, name, configuration):
+        for rel in self.relations:
+            print(configuration)
+            rel.to_publish_raw['backend_name'] = name
+            rel.to_publish['subordinate_configuration'] = configuration
