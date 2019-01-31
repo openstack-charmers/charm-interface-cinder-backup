@@ -15,7 +15,7 @@
 from charms.reactive import Endpoint
 
 
-class CinderBackupSwiftProviderProvides(Endpoint):
+class CinderBackupProviderProvides(Endpoint):
     def publish(self, name, configuration):
         for rel in self.relations:
             print(configuration)

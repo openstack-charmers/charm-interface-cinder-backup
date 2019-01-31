@@ -1,4 +1,4 @@
 name: cinder-backup
-summary: Interface to connect cinder-backup with external swift
+summary: Interface to connect cinder-backup with external backend 
 version: 1
 repo: https://github.com/lolwww/interface-cinder-backup-swift
