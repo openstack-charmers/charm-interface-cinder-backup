@@ -18,6 +18,5 @@ from charms.reactive import Endpoint
 class CinderBackupProviderProvides(Endpoint):
     def publish(self, name, configuration):
         for rel in self.relations:
-            print(configuration)
             rel.to_publish_raw['backend_name'] = name
             rel.to_publish['subordinate_configuration'] = configuration
