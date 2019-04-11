@@ -1,4 +1,4 @@
-# Copyright 2017 Canonical Ltd
+# Copyright 2018 Canonical Ltd
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +15,10 @@
 from charms.reactive import Endpoint
 
 
-class CinderBackupProviderProvides(Endpoint):
+class CinderBackupProvides(Endpoint):
+
+
     def publish(self, name, configuration):
-        for rel in self.relations:
-            rel.to_publish_raw['backend_name'] = name
-            rel.to_publish['subordinate_configuration'] = configuration
+        for relation in self.relations:
+            relation.to_publish_raw['backend_name'] = name
+            relation.to_publish['subordinate_configuration'] = configuration
