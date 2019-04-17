@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from charms.reactive import Endpoint
+import sys
 
+sys.path.append('src')
+sys.path.append('src/lib')
 
-class CinderBackupProvides(Endpoint):
-
-    def publish(self, name, configuration):
-        for relation in self.relations:
-            relation.to_publish['backend_name'] = name
-            relation.to_publish['subordinate_configuration'] = configuration
+# Mock out charmhelpers so that we can test without it.
+import charms_openstack.test_mocks  # noqa
+charms_openstack.test_mocks.mock_charmhelpers()

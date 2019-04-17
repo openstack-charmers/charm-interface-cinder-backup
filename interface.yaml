@@ -2,3 +2,10 @@ name: cinder-backup
 summary: Interface to connect cinder-backup with external backend 
 version: 1
 repo: https://github.com/lolwww/interface-cinder-backup
+ignore:
+  - 'unit_tests'
+  - '.stestr.conf'
+  - 'test-requirements.txt'
+  - 'tox.ini'
+  - '.gitignore'
+  - '.travis.yml'
