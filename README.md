@@ -18,3 +18,9 @@ provides:
     interface: cinder-backup
     scope: container
 ```
+
+# Bugs
+
+Please report bugs on [Launchpad](https://bugs.launchpad.net/openstack-charms/+filebug).
+
+For development questions please refer to the OpenStack [Charm Guide](https://github.com/openstack/charm-guide).
