@@ -12,10 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from charms.reactive import Endpoint
+from charms.reactive import (
+    Endpoint,
+    clear_flag,
+    set_flag,
+    when,
+    when_any,
+)
 
 
 class CinderBackupProvides(Endpoint):
+
+    @when('endpoint.{endpoint_name}.joined')
+    def joined(self):
+        set_flag(self.expand_name('{endpoint_name}.connected'))
+
+    @when('endpoint.{endpoint_name}.changed')
+    def changed(self):
+        set_flag(self.expand_name('{endpoint_name}.available'))
+        clear_flag(self.expand_name('endpoint.{endpoint_name}.changed'))
+
+    @when_any('endpoint.{endpoint_name}.broken',
+              'endpoint.{endpoint_name}.departed')
+    def departed(self):
+        flags = (
+            self.expand_name('{endpoint_name}.available'),
+            self.expand_name('{endpoint_name}.connected'),
+        )
+        for flag in flags:
+            clear_flag(flag)
 
     def publish(self, name, configuration):
         for relation in self.relations:
